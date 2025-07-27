@@ -16,7 +16,7 @@ const PerformanceOptimization = () => {
     }
   };
 
-  const arrayList = ["alok", "ankit", "hemant", "suraj"];
+  let arrayList = ["alok", "ankit", "hemant", "suraj"];
 
   const addElementToArray = (val) => {
     arrayList = [...arrayList, val];

@@ -3,7 +3,7 @@ import { use } from "react";
 
 const Pagination = () => {
   const [data, setData] = useState([]);
-  const [pageSize, setPageSize] = useState(5);
+  const [pageSize, setPageSize] = useState(4);
   const [startingIndex, setStartingIndex] = useState(0);
   const [endingIndex, setEndingIndex] = useState(pageSize);
   const [toatalPage, setToatalPage] = useState(1);
@@ -14,17 +14,19 @@ const Pagination = () => {
       var jsonData = await res.json();
       console.log(jsonData);
       setData(jsonData);
-      setToatalPage(ceiling(jsonData.lenght / pageSize));
+      setToatalPage(Math.ceil(jsonData.lenght / pageSize));
     } catch (err) {
       console.log("error occured", err);
     }
   };
 
   const handleIndex = (pageNo) => {
-    setStartingIndex((pageNo -1 )*5)
-    setEndingIndex((pageNo)*5)
+    setStartingIndex((pageNo - 1) * pageSize);
+    setEndingIndex(pageNo * pageSize);
   };
 
+  const pagination = new Array(Math.ceil(data.length / pageSize)).fill(undefined);
+  console.log(pagination);
 
   useEffect(() => {
     fetchData();
@@ -43,14 +45,16 @@ const Pagination = () => {
               {items.id} : <strong>{items.title}</strong>
             </div>
           ))}
-           
-           
-           
-           
-          <button className="btn btn-danger" onClick={() =>handleIndex(3)}>3</button>
-          <button className="btn btn-danger" onClick={() =>handleIndex(1)}>1</button>
-          <button className="btn btn-danger" onClick={() =>handleIndex(4)}>4</button>
-          <button className="btn btn-danger" onClick={()=>handleIndex(2)}>2</button>
+
+          {pagination.map((items, index) => (
+            <button
+              key={index}
+              className="btn btn-danger mx-1"
+              onClick={() => handleIndex(index + 1)}
+            >
+              {index + 1}
+            </button>
+          ))}
         </div>
       </div>
     </div>
