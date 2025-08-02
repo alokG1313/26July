@@ -6,13 +6,12 @@ import PerformanceOptimization from "./components/PerformanceOptimization";
 import MultipleTabs from "./components/MultipleTabs";
 import OtpFilling from "./components/OtpFilling";
 import Pagination from "./components/Pagination";
-
+import TodoComponents from "./components/TodoComponents";
+import themeContext from "./context/themeContext";
+import ThemeSelector from "./components/ThemeSelector";
+import Dropdown from "./components/Dropdown";
 const App = () => {
-  return (
-    <>
-      <Pagination />
-    </>
-  );
+  return <TodoComponents />;
 };
 
 export default App;
